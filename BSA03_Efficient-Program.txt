@@ -1,0 +1,55 @@
+import pandas as od
+import numpy as np
+
+def 데이터프레임생성(size):
+df = pd. DataFrame ()
+df ["LtO|"] = np. random. choice (100, size)
+I!"수행평가1"! = np.random.choice(!"A”.“B”,"C""D" "F“l, size)
+or , 주행용가고  E mo random. choice([상. 중: "하, size)
+df["=*="] = np.random.choice (["(0,3)", " (3,3.5)", "(3.5,4)", " (4,4.3]"], size)
+df ["합격확률"] = np. random.uniform(0,1,size)
+df["결과"] = np. random. choice(["합격", "불합격"1, size)
+return df
+
+df = 데이터프레임생성 (1000000)
+# 이 = 데이터프레임생성(1000,000)
+df1 = df . copy ()
+df2 = df .copy ()
+df 1. infol
+
+stimeit df1[”순위1"] = df1 . groupby(["수행평가1", "학점"1)["나이"] .rankl
+gt imeit df1["순위2"] = cf1 . groupby(["수행평가1", "학점"1) ["합격확률" 1. rank()
+%t imeit df1["순위3"] = df 1.groupby(["수행평가1","학점", "결과" ]) [”합격확률" 1. rank()
+
+df2l"수행평가1"] = df21 수행평가1"] astype('category')
+df2"수행평가2"! = cf2["수행평가2" 1. astype('category')
+df2["학점"] = df2["학점" 1.astype('category')
+df2. info()
+
+df2["LtO|"] = df2["L+O|"]. astype('int8')
+df2. info()
+
+cf2["합격확률"] = df2["합격확률" 1.astype(' f loat32 ' )
+df2. info()
+
+dr2"결과"1 = df21"결과"1.map(f"합격" : True, "불합격" : Falsel)
+df2. info()
+
+stimeit df2[”순위1"] = df2. groupby(["수행평가1", "학점" 1)["나이"J.rank()
+gt imeit df2[”순위2"] = df2. groupby(["수행평가1", "학점"1) [”합격확률"1. ralk()
+%t imeit df2l"순위3"] = df2. groupby(["수행평가1", "학점","결과"]) [”합격확률" 1. rank()
+
+** 파일 저장
+변수 = ["나이" "수행평가1", "수행평가2", "학점", "합격확률","결과"]
+df2 = df2[변수]
+df1.to_csv("BSA03_df1.csy", index=False) df2. to_csv ('BSA03_df2.csv', index-False)
+dficsy = pd. read_csv('BSA03_df1.csv')
+df2csv = pd. read_csv ('BSA03_df2.csv')
+
+dficsv. info()
+
+df2csv. info()
+
+df2. to_parquet ('BSA03_df2.parquet')
+df2pqt = pd. read_parquet ('BSA03_df2.parquet ')
+df 2pgt. infoO
