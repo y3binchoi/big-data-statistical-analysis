@@ -1,0 +1,970 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>빅데이터통계분석</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7bf49625-dac5-47b4-8f38-ceac3bebf12a" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎛️</span></div><h1 class="page-title">빅데이터통계분석</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM7.62402 10.6348C7.79492 10.915 8.20508 10.9287 8.37598 10.6348L10.666 6.73145C10.8574 6.41016 10.7002 6.04102 10.3652 6.04102H5.62793C5.29297 6.04102 5.14941 6.43066 5.32031 6.73145L7.62402 10.6348Z"></path></svg></span>전공</th><td><span class="selected-value select-value-color-yellow">ST</span></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRelation"><path d="M13.1475 10.5869V3.72363C13.1475 3.25195 12.833 2.93066 12.3477 2.93066H5.48438C5.02637 2.93066 4.70508 3.27246 4.70508 3.67578C4.70508 4.07227 5.05371 4.40039 5.46387 4.40039H7.89746L10.8438 4.30469L9.59961 5.39844L3.08496 11.9199C2.92773 12.0771 2.8457 12.2686 2.8457 12.46C2.8457 12.8564 3.20801 13.2256 3.61816 13.2256C3.80957 13.2256 3.99414 13.1504 4.15137 12.9932L10.6729 6.47168L11.7803 5.22754L11.6641 8.05762V10.6074C11.6641 11.0176 11.9922 11.373 12.4023 11.373C12.8057 11.373 13.1475 11.0312 13.1475 10.5869Z"></path></svg></span>출석&amp;과제</th><td><a href="https://www.notion.so/e0d0a3fa242b45d89c2ce2c6d543661d"><span class="icon">🎛️</span>실습실, 하둡 설치</a>, <a href="https://www.notion.so/wordcount-4dac2ce40e2049baa959b0bbf70c6906"><span class="icon">🎛️</span>하둡 wordcount, 파이썬 설치</a>, <a href="https://www.notion.so/8b399167e5c143d79779358d59b81e4e"><span class="icon">🎛️</span>빅통분</a>, <a href="https://www.notion.so/1-1-5-97b7d9515ea049e1a413bf53d760b68b"><span class="icon">🎛️</span>퀴즈1 -1.5</a>, <a href="https://www.notion.so/2-2-fc9e7033f0144504a3a111ff14b0d89f"><span class="icon">🎛️</span>퀴즈2 -2</a>, <a href="https://www.notion.so/241df10e4c5844f69f2acd5b8800a62c"><span class="icon">🎛️</span>다음주 월요일에 퀴즈</a>, <a href="https://www.notion.so/041c65116a04416aba2c09948a211384"><span class="icon">🎛️</span>다음주 월요일에 퀴즈</a>, <a href="https://www.notion.so/3-7-3cc90a70aaef4240af9181ae7d738b7b"><span class="icon">🎛️</span>퀴즈3 -7</a>, <a href="https://www.notion.so/audio-8f2c3830bea94ee587c4174b7f832d09"><span class="icon">🎛️</span>자료전처리 + 지난시간 audio 처리</a>, <a href="https://www.notion.so/9-458593fae8f744ca838a3a10a121d81b"><span class="icon">🎛️</span>9주차부터 프로젝트 시작</a>, <a href="https://www.notion.so/4-4a014effdeac48dbb5b65e45d3e2dedd"><span class="icon">🎛️</span>퀴즈4</a></td></tr></tbody></table></header><div class="page-body"><figure class="callout" style="white-space:pre-wrap;display:flex" id="0b11ae33-36bc-458d-beb9-4c43e0c6b8a9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">졸업시험 통과하자!!!<nav id="7c6c502e-69a0-4f4a-a60b-f4bd96cb0ad7" class="table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3a0afdfc-b0e6-4879-b67a-751ee8b4c648">Bigdata</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4be13880-572f-45f1-9d18-58bdead6c227">Course</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#324d4743-333b-4edd-a74a-ed692fbfdaa6">01 빅데이터를 처리하기 위한 프로그램 설치 및 사용법</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bbee98ae-b925-494c-8fe7-5634178f0865">Hadoop ecosystem</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2c4614c5-3847-42e4-adc6-9f09ee49d7b3">설치 및 확인</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#382ce576-ec78-4eb9-9aa5-cac39f4f48ca">Java</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0f704636-1f1e-4c8e-a4cc-56d9f6b3a85b">Hadoop</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f28b7b8a-ae3d-4ef6-9ab7-f7101ad3b923">Hadoop command</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0ff95cff-1c18-4c12-af87-8df01ce95366">Mapreduce ex</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4dd2bdfe-be31-47b3-8955-626c6865237c">02 데이터 수집 및 저장</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#28224edf-b570-44fa-8ece-a7108d474420">위키피디아 텍스트 데이터</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#74f322b9-f66a-4144-9925-ce0b0ce6fb91">03 통계분석 과정과 예제</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#678eb8ef-e275-4f9c-85f3-e11d8fcde17b">BSA02 Efficient program</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#13493628-125c-4cbd-b073-40e6226d6523">04 자료 읽기 쓰기</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9071fdaf-22c3-4e6b-bafb-4b0017087906">BSA04 ReadWrite DataFiles</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9a690743-9203-4c73-bbfd-a7b59d280060">BSA04 ReadWrite Speed</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9ea2deba-f3ad-4879-9cd3-e42fe7de0157">BSA04 Audio</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#686f2f86-b6fe-4781-abf5-437a0403642d">05 자료 전처리</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bc451097-acf1-4948-b19d-f9d6bebc9870">BSA05 Data Transform</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#50de7b18-1c35-4490-b9f5-76c22f8a168c">BSA05 Missing Values</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4e57f9b1-03ac-4a91-b932-6ea82a08e4a4">BSA05 Pyspark Missing Values</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8b4491a2-4cac-48d7-9c90-dbf28b91224a">BSA05 Combine DataFrame</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4ce5f3e4-5456-487d-9935-8bcb7a1634fe">BSA05 Imbalanced Resampling</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b3b39ba8-798a-49a2-b1e6-03e125edc108">BSA05 Dimention Reduction</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f2370638-24fc-465e-b46b-6a99ea2237c6">06 그래프</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#661e06ad-92c8-488e-9fa6-f64cca8636e6">BSA06 Pandas EDA</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5ced91a2-9210-43b2-adfb-d74773f156b9">BSA06 Pyspark EDA</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7fb8a05a-b01b-4688-b0cd-156d3c04416b">BSA03 Dashboard CO2</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1afb8b08-4beb-47f4-8277-a6166394f30d">BSA06 Word Cloud</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6051097e-6e9d-4c06-b674-5e4646ba52e5">BSA06 Matplotlib Korean</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0fe829d2-da7d-4a83-8483-d8fd3f44ca94">BSA05 Housing Project</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#90179ec6-2735-448d-829a-54c7970eb9fe">07 NLP</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d39f9c5f-68a0-488f-8560-f57c33a77531">BSA07 Python SMS Spam</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a2e597c8-4987-4ca7-af43-66faffd31e65">BSA07 Pyspark SMS Spam</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d30cf6e6-d2c8-4743-ad3c-5fe3faef5693">BSA07 NLP</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#54691fee-04af-4379-90eb-23d9b8fca3f4">BSA07 Pyspark NLP</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#725c8be4-6f4b-4e43-812b-85eace56695d">08 통계 모델링</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#96d762b2-efa3-40ad-ba9f-dbf90f5fd62e">통계모형</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ca09c2ad-55e8-410e-84f8-c3c634f3c635">패키지</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7e4492ef-2b43-44fa-a085-0102b7e1cb37">BSA08 Regress Whitewine</a></div></nav></div></figure><hr id="e8dbe510-3408-42b0-b95e-5557a5c0ae8c"/><h2 id="3a0afdfc-b0e6-4879-b67a-751ee8b4c648" class="">Bigdata</h2><blockquote id="ab07989c-9842-40e2-8069-44f3c282c2c8" class="">3V = {Volumn, Velocity, Variety} + …</blockquote><p id="30808c43-ee5d-466d-86d5-de805b89ef34" class="">
+</p><h2 id="4be13880-572f-45f1-9d18-58bdead6c227" class="">Course</h2><ul id="25338bad-171f-4410-bf2c-552b401bf7ec" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">빅데이터를 처리하기 위한 프로그램 설치 및 사용법</span><div class="indented"></div></li></ul><ul id="a25a4c77-b6dd-4e4f-ac0c-2d2c810451a2" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">빅데이터 수집/저장/변환</span><div class="indented"></div></li></ul><ul id="0702ecc9-efc6-499c-8594-4dfd5f8c0b8d" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">데이터 전처리</span><div class="indented"></div></li></ul><ul id="c3c08ba6-1136-4e84-b986-ab4cf4a7c21c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">분석 목적과 데이터 형태에 따른 통계분석 방법</span><div class="indented"></div></li></ul><ul id="9a43eff2-1376-4b39-90d9-4759e4c3e1f6" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">분석 결과 전달 방식</span><div class="indented"></div></li></ul><p id="a12427f6-5826-42bb-8256-30b3ec0898a9" class="">
+</p><h2 id="324d4743-333b-4edd-a74a-ed692fbfdaa6" class="">01 빅데이터를 처리하기 위한 프로그램 설치 및 사용법</h2><h3 id="bbee98ae-b925-494c-8fe7-5634178f0865" class="">Hadoop ecosystem</h3><p id="55ffe9a3-6778-4b29-93f5-ec9a318cdf66" class="">데이터 수집</p><ul id="d0459b3f-dade-410e-9a0a-a55806ec5724" class="bulleted-list"><li style="list-style-type:disc">kafka : 실시간으로 스트림을 처리하는 분산 데이터 스트리밍 플랫폼</li></ul><p id="00558bec-b912-43fd-9d12-642151cb7fbc" class="">데이터 저장</p><ul id="888a54a6-4226-450d-ac5f-8fe67cab7a74" class="bulleted-list"><li style="list-style-type:disc">Hadoop HDFS(Hadoop Distributed File System) </li></ul><p id="8f4decd3-3e49-42b4-b505-034833490249" class="">데이터 처리 </p><ul id="269f2a30-21b6-4c92-a2e5-635985bf6825" class="bulleted-list"><li style="list-style-type:disc">MapReduce : 병렬 프로그래밍으로 클러스터 내에서 분산 처리</li></ul><ul id="c61e511b-5c44-429d-bd2b-248e062e00c4" class="bulleted-list"><li style="list-style-type:disc">Yarn : 하둡 내 작업 스케쥴링, 클러스터 리소스 관리를 위한 프레임워크</li></ul><ul id="259f912c-6c93-4049-9b5b-e4af4e286d8e" class="bulleted-list"><li style="list-style-type:disc">Spark : In-memory 기반 병렬 분산 처리하는 통합 컴퓨팅 엔진</li></ul><p id="65c62433-5294-4eba-8f7b-40f5bae30249" class="">
+</p><h3 id="2c4614c5-3847-42e4-adc6-9f09ee49d7b3" class="">설치 및 확인</h3><ul id="2706811c-8a43-4b07-8d88-f4810105da23" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">기존 설치 python, R 삭제</span><div class="indented"></div></li></ul><ul id="cc1e437f-fb6b-400c-933d-24d0e0ddf0f4" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">코어 수 확인</span><div class="indented"><ul id="44689ba9-7685-4d93-b3cc-168e37b35eef" class="bulleted-list"><li style="list-style-type:disc">검색&gt;”시스템 정보”&gt;프로세서<ul id="b7657660-246d-4a89-9367-c4f341cbba2e" class="bulleted-list"><li style="list-style-type:circle">논리 프로세서 = Thread : 논리적 작업 처리 단위. 많을 수록 분산 처리 빨라짐.</li></ul></li></ul></div></li></ul><ul id="af489719-d36e-4afb-831c-f42a1876d38d" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">최신 Visual C++ 재배포 가능 패키지 : OS에 맞게 컴파일 해줌</span><div class="indented"></div></li></ul><ul id="8b19a9dc-9caf-4a45-88aa-94859ef6bc6f" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">Oracle jdk-8u351 이상</span><div class="indented"></div></li></ul><ul id="91446c31-5037-4838-b90a-fa46efcf0ba2" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">hadoop-3.2.2</span><div class="indented"></div></li></ul><ul id="1c164ed9-ca4b-4ee1-b7a2-6d80194be085" class="to-do-list"><li><div class="checkbox checkbox-on"></div> <span class="to-do-children-checked">python-3.9.1</span><div class="indented"></div></li></ul><p id="85eb22e8-63b9-491b-909b-4a7a9724c4eb" class="">
+</p><h3 id="382ce576-ec78-4eb9-9aa5-cac39f4f48ca" class="">Java</h3><ol type="1" id="1a9ae157-45cb-4833-9eb1-0ed579d0e715" class="numbered-list" start="1"><li>설치</li></ol><ul id="427d8703-fa6b-4b69-b256-05edaf7f024d" class="bulleted-list"><li style="list-style-type:disc">jdk-8u361 설치</li></ul><ul id="51b502df-a8cc-4d3d-9dc6-f36c37d56e0c" class="bulleted-list"><li style="list-style-type:disc">C:\java 에 내용 복사</li></ul><ol type="1" id="36ed82bf-a5ce-4b55-8e61-4041d60cdf20" class="numbered-list" start="2"><li>환경 설정</li></ol><ul id="f8ab8b14-f2c1-4c89-a10f-be303b0ce410" class="bulleted-list"><li style="list-style-type:disc">검색&gt;”고급 시스템 설정”&gt;”환경변수”&gt;”시스템 변수”<ul id="dfd8d286-3a8c-4993-a78b-5d67b755ed91" class="bulleted-list"><li style="list-style-type:circle">JAVA_HOME : C:\java</li></ul><ul id="81884582-7e35-4b03-93bc-6ffc1cedc6dc" class="bulleted-list"><li style="list-style-type:circle">path 추가 : C:\java\bin, C:\java\jre\bin 추가</li></ul></li></ul><ol type="1" id="8a52e314-1d3e-4170-ae99-5a929ed02521" class="numbered-list" start="3"><li>버전 확인</li></ol><pre id="4f540f4b-6fcb-43a9-b117-f1f2e5a46a9a" class="code"><code>java -version
+javac -version </code></pre><p id="9a65dfa9-7fbe-4851-8531-2ac92b650824" class="">
+</p><p id="3581661a-4d53-44e4-a917-97b32c73d5e2" class="">
+</p><h3 id="0f704636-1f1e-4c8e-a4cc-56d9f6b3a85b" class="">Hadoop</h3><ol type="1" id="dc65096a-0885-4b9c-b4da-c9ec600f5836" class="numbered-list" start="1"><li>설치</li></ol><ul id="240ce331-d32f-4533-be72-e5c56419b21c" class="bulleted-list"><li style="list-style-type:disc">Hadoop 3.2.2.tar.gz 압축 풀기</li></ul><ul id="6734a5af-6217-4a62-ba54-077c5346c2b4" class="bulleted-list"><li style="list-style-type:disc">C:\hadoop-3.2.2에 복사</li></ul><ul id="dc5560f2-0e7e-4196-9b30-8d9bce33a4da" class="bulleted-list"><li style="list-style-type:disc">환경변수 설정<ul id="3dfd13bb-a91c-446d-a9b2-897efb6d9f14" class="bulleted-list"><li style="list-style-type:circle">HADOOP_HOME : C:\hadoop-3.2.2</li></ul><ul id="99cf6caf-56f2-4dbc-a498-20336ce48ce6" class="bulleted-list"><li style="list-style-type:circle">path 추가 : C:\hadoop-3.2.2\bin</li></ul></li></ul><ol type="1" id="75371985-286a-4735-ace3-7430c7ca7944" class="numbered-list" start="2"><li>namenode와 datanode를 생성할 위치 지정</li></ol><ul id="e99ca679-f210-42ce-974e-9218aa4cad2a" class="bulleted-list"><li style="list-style-type:disc">D:\hadoop\data 생성</li></ul><ol type="1" id="eb40021a-dc57-4b23-9ea0-484e59f66441" class="numbered-list" start="3"><li>설정 파일 수정</li></ol><ul id="842dd6f3-a06e-42bc-94bb-ebddb8c38bc4" class="bulleted-list"><li style="list-style-type:disc">교수님 깃허브 <a href="https://github.com/Statfunny/Bigdata-Statistical-Analysis">https://github.com/Statfunny/Bigdata-Statistical-Analysis</a></li></ul><ul id="f262d183-3b75-45d2-abf4-42a488947eb0" class="bulleted-list"><li style="list-style-type:disc">C:\hadoop-3.2.2\etc\hadoop에서<ul id="7b5a5470-6ab1-4313-9277-a83ce790d2eb" class="bulleted-list"><li style="list-style-type:circle">hadoop-env.cmd : &#x27;-env&#x27;는 보통 환경변수를 다루는 파일을 명시할 때 사용한다. &#x27;cmd&#x27;확장자는 배치파일이다.</li></ul><ul id="69dfb42a-f8bc-49de-aab9-b8419c4e48b4" class="bulleted-list"><li style="list-style-type:circle">core-site.xml : hdfs와 mapreduce에서 공통적으로 사용되는 로그파일, 네트워크 튜닝, I/O튜닝, 파일 시스템 튜닝, 압축 등과 같이 기본적인 하부 시스템 설정한다.</li></ul><ul id="3293dca8-27fc-4506-beda-d30772b36be5" class="bulleted-list"><li style="list-style-type:circle">hdfs-site.xml : 파일복제 옵션, 저장위치 지정</li></ul><ul id="d08a861c-431d-49cb-b408-20d89d32749b" class="bulleted-list"><li style="list-style-type:circle">mapred-site.xml : mapreduce 설정 </li></ul><ul id="3561d2d9-9fab-40fa-afa4-9d7afb255621" class="bulleted-list"><li style="list-style-type:circle">yarn-site.xml : yarn(mapreduce 기반 하둡의 문제(리소스 할당 문제나 Sparkl 등의 새로운 플랫폼 출현)를 해결하기 위한 하둡의 서브 프로젝트) 설정 관리</li></ul></li></ul><ol type="1" id="0688da41-3eaa-48fc-9d01-4959addba6f4" class="numbered-list" start="4"><li>window 용 실행 및 설정 파일 수정</li></ol><ul id="3172dd51-b5f4-4fac-b63e-3bbe0313cb46" class="bulleted-list"><li style="list-style-type:disc">C:\hadoop-3.2.2\bin에 덮어쓰기</li></ul><ol type="1" id="3bf9dffd-e985-4d8a-8cc8-57bb4fd54136" class="numbered-list" start="5"><li>hadoop format</li></ol><ul id="c55e83d6-6c75-49e2-8bfa-1c4e9b463772" class="bulleted-list"><li style="list-style-type:disc">cmd에 명령어 입력 하고 D:\hadoop\data에 namenode 폴더 생성 확인<pre id="2f8f0327-272e-45a6-bd44-4e4c19ab7768" class="code"><code>hdfs namenode -format</code></pre></li></ul><ol type="1" id="37592811-9d03-4845-be67-cd8a92fb0a65" class="numbered-list" start="6"><li>hdfs 실행</li></ol><ul id="0bd6b95b-10a9-4cb2-b1ec-357ed9805d4b" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-orange"><strong>관리자 cmd 에서 실행</strong></mark></li></ul><ul id="290b099c-f558-41c5-933f-3ce207f3ee20" class="bulleted-list"><li style="list-style-type:disc">%HADOOP_HOME%\sbin에서</li></ul><ul id="95c5f402-a11e-4e04-a11e-7ea7de6b3e28" class="bulleted-list"><li style="list-style-type:disc">namenode와 datanode 시작<pre id="b0de11ed-43f5-4185-aad5-66ed1acda53b" class="code"><code>start-dfs.cmd # 하둡 클러스터 시작. datanode 생성
+jps # 하둡 데몬(프로세스) 확인</code></pre><ul id="b526bd31-39f2-4b71-9c38-493f39b21e6c" class="bulleted-list"><li style="list-style-type:circle">D:\hadoop\data에 datanode 생성 확인</li></ul><ul id="0565e15d-c560-47d8-829e-710508cc4438" class="bulleted-list"><li style="list-style-type:circle">localhost:9870</li></ul></li></ul><ol type="1" id="177ae05f-254d-48e8-a001-d9847b5b9fc0" class="numbered-list" start="7"><li>mapreduce 실행</li></ol><ul id="023260bf-f93d-4477-9a55-05dd6b9c336e" class="bulleted-list"><li style="list-style-type:disc">ResourceManager와 NodeManager 시작<pre id="c5799402-ea08-4e10-bce6-580e8ec8ee7a" class="code"><code>start-yarn.cmd
+jps</code></pre></li></ul><ul id="1a8a7b28-7c64-4e27-bf2a-4efffadac360" class="bulleted-list"><li style="list-style-type:disc">일괄 실행 및 종료<pre id="9e8de006-5913-4a68-96f5-400a509e20f2" class="code"><code>start-all.cmd # 일괄 실행 
+stop-all.cmd # 일괄 종료</code></pre><p id="b0e55a05-ef3b-4c3f-bba3-293b59131d23" class="">namenode,datanode,nodemanager,resourcemanager 창 4개가 열려있어야 함</p></li></ul><blockquote id="93fee351-6e84-4b9a-ad58-03d36789f80b" class="">참고</blockquote><ul id="7e4eff67-31fb-4092-aa2a-fa00f5069600" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.incodom.kr/hadoop_%EC%B4%9D%EC%A0%95%EB%A6%AC_3%ED%8E%B8#h_d5dac533f34680d774f11ed81c3bbab4">hadoop 파일</a> </li></ul><p id="c6e8e5f9-33f0-439b-b27c-f2f62cefffb1" class="">
+</p><h3 id="f28b7b8a-ae3d-4ef6-9ab7-f7101ad3b923" class="">Hadoop command</h3><p id="219b0a89-3a37-4908-92c5-963f6b6b6fa9" class="">
+</p><p id="5ddf01b7-b976-4a14-b232-81b605799489" class="">
+</p><h3 id="0ff95cff-1c18-4c12-af87-8df01ce95366" class="">Mapreduce ex</h3><figure class="block-color-gray callout" style="white-space:pre-wrap;display:flex" id="d659046b-dd80-4699-ae0e-e4b1193956bf"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">관리자 권한으로 실행</div></figure><ol type="1" id="a48a7d64-7607-4cf8-a255-242dd2c5d59f" class="numbered-list" start="1"><li>wordcount</li></ol><ul id="c8955cd6-fbe5-4b07-bba6-30ec8599da63" class="bulleted-list"><li style="list-style-type:disc">d:\Bigdata\I-have-a-dream.txt  파일을  /Input에  put  후  wordcount  계산  결과를
+/Output에  출력</li></ul><pre id="ab3167b3-8159-4c19-966c-21fb0ef691b3" class="code"><code>cd  $HADOOP_HOME%\share\hadoop\mapreduce 
+hadoop  fs  –mkdir  /Input
+hadoop  fs  –put  d:\Bigdata\I-have-a-dream.txt  /Input 
+yarn  jar  hadoop-mapreduce-examples-3.2.2.jar  wordcount /Input/I-have-a-dream.txt  /Output 
+hadoop  fs  –cat  /Output/*</code></pre><ul id="e3cb610d-88ba-4843-b197-9ee522174bf3" class="bulleted-list"><li style="list-style-type:disc">hadoop은 java로 사용함</li></ul><ul id="347bb5c1-559b-4065-8ae4-b4ce769d48b5" class="bulleted-list"><li style="list-style-type:disc">폴더만 쓰면 폴더 안의 모든 파일을 분석</li></ul><ul id="83a2c6e6-86d6-4c9e-b153-a5fba23cb2ab" class="bulleted-list"><li style="list-style-type:disc">localhost:9870 &gt; Utilities &gt; Browse the filesystem에서 확인 가능</li></ul><ul id="92c4a61b-9f39-4a08-9992-189aa618ae38" class="bulleted-list"><li style="list-style-type:disc">yarn → hadoop으로 써도 가능</li></ul><p id="739baac4-a8e4-4c44-8a21-04f8d2ddeda1" class="">
+</p><h2 id="4dd2bdfe-be31-47b3-8955-626c6865237c" class="">02 데이터 수집 및 저장</h2><h3 id="28224edf-b570-44fa-8ece-a7108d474420" class="">위키피디아 텍스트 데이터</h3><ul id="19a9aa9c-bc4f-4a15-bf51-f033586f654c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://dumps.wikimedia.org/enwiki/latest/">https://dumps.wikimedia.org/enwiki/latest/</a> <p id="26129d3e-10f9-4e4f-b867-071a9fd42272" class="">enwiki-latest-pages-articles.xml.bz2 다운로드 후 압축해제</p><p id="d0c577af-da61-423b-8695-a1eb76978b3e" class="">D:\Enwiki 폴더에 저장</p></li></ul><ul id="efe1e2f2-6c02-4f02-8761-81c1f7e3d80d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://dumps.wikimedia.org/kowiki/latest/">https://dumps.wikimedia.org/kowiki/latest/</a> <p id="fe4ca2cd-09f4-4549-b4c1-09530b31a1ed" class="">kowiki-latest-pages-articles.xml.bz2 다운로드 후 압축해제</p><p id="a79d3aff-580a-46bf-b90b-2ce8da2c9713" class="">D:\Kowiki 폴더에 저장</p></li></ul><ul id="73908e18-902c-438e-a016-b892ead96853" class="bulleted-list"><li style="list-style-type:disc">Ruby의 wp2txt로 XML → TXT 변환<blockquote id="6687a439-cae3-4178-8c40-d3c718cd97b1" class="">WP2TXT  extracts  text  and  category  data  from  Wikipedia  dump  files
+(encoded  in  XML  /  compressed  with  Bzip2),  removing  MediaWiki  markup and  other  metadata</blockquote><ul id="10996e60-6462-4fb5-9571-802aed3659f7" class="bulleted-list"><li style="list-style-type:circle">python, R 보다 빠르고 메모리 적음</li></ul><ol type="1" id="973e1b0f-86c3-4c7c-b236-1796884d1719" class="numbered-list" start="1"><li>window용 ruby 다운&amp;설치</li></ol><ol type="1" id="b235e7b9-0531-4054-be26-f9c1b246adc2" class="numbered-list" start="2"><li>cmd</li></ol><pre id="d11ecfdf-a9b8-47ad-84d9-38c29ca8396d" class="code"><code>gem install wp2txt</code></pre><ol type="1" id="8dd528c3-eb7b-4dac-9e74-30248cf9250a" class="numbered-list" start="3"><li>각 폴더 cmd에서 txt로 저장</li></ol><pre id="6ddf9635-4c30-4a16-9d2d-d8a5c47235eb" class="code"><code>wp2txt -i kowiki-latest-pages-articles.xml -c</code></pre><ol type="1" id="cd9cb932-b18b-4b33-80c5-45add5c801ba" class="numbered-list" start="4"><li>파일명 번호가 일정한 간격fwf이 아님</li></ol><ul id="8f8fc9e3-1db1-4b20-8147-33f733cf893d" class="bulleted-list"><li style="list-style-type:circle">BSA02-Rename-Files.ipynb 코드 참고</li></ul><ol type="1" id="6e9a4ef9-494d-4bb2-907d-20c043dc1eed" class="numbered-list" start="5"><li>Kowiki.txt 하나의 파일로 묶기</li></ol><pre id="18bddac5-52d0-48f0-90b3-e01a62386957" class="code"><code>type  kowiki-latest-pages-articles-001.txt  |  more 
+type  kowiki-latest-pages-articles-*.txt  &gt;&gt;  Kowiki.txt</code></pre><ol type="1" id="08d8be8a-a819-487c-a076-25534871670c" class="numbered-list" start="6"><li>실습) Hadoop의 /Wiki 폴더에 Wiki 자료 업로드</li></ol><ul id="72903723-8462-4b5b-84e8-6b948568d9fe" class="bulleted-list"><li style="list-style-type:circle">관리자? %HADOOP_HOME%sbin에서 start-all.cmd</li></ul><ul id="fb9b6938-e638-4ad5-87e8-0c1ee9fc86cf" class="bulleted-list"><li style="list-style-type:circle">/Wiki 폴더 생성</li></ul><ul id="826231d3-fafe-4add-94ca-de4b540ccacf" class="bulleted-list"><li style="list-style-type:circle">Kowiki.txt를 put</li></ul><ul id="d5d9aeec-cdb0-4b22-ba24-3cea3f4b5957" class="bulleted-list"><li style="list-style-type:circle">cmd에서 업로드 확인</li></ul><ul id="191f41e7-5e1c-4ba2-977e-05d2764424f8" class="bulleted-list"><li style="list-style-type:circle">localhost:9870→Utilities→Browse the filesystem에서도 확인</li></ul><p id="567d15be-bd76-456c-8998-5a5a0ba17aa9" class="">
+</p></li></ul><h2 id="74f322b9-f66a-4144-9925-ce0b0ce6fb91" class="">03 통계분석 과정과 예제</h2><h3 id="678eb8ef-e275-4f9c-85f3-e11d8fcde17b" class="">BSA02 Efficient program</h3><p id="48fe81f0-9de0-43bc-8f95-0d841a208c03" class="">효율적인 메모리 관리와 프로그램 작성</p><ul id="3425051a-78a2-403e-b66e-0f2c835dc8b7" class="bulleted-list"><li style="list-style-type:disc">문자열 → 범주형</li></ul><ul id="8a5b9adf-6c80-45e5-ad9a-85c7b48f54a8" class="bulleted-list"><li style="list-style-type:disc">범위가 제한적인 정수형<ul id="753f746b-3dbe-45c1-bc17-83cdee20e0fe" class="bulleted-list"><li style="list-style-type:circle">int8, int16, int 64</li></ul></li></ul><ul id="013e3fda-3730-4c0b-b614-23fda2cab7f6" class="bulleted-list"><li style="list-style-type:disc">최소한의 실수형<ul id="8a8ddf4f-8621-4807-8f9a-efa8aea38135" class="bulleted-list"><li style="list-style-type:circle">float32</li></ul></li></ul><ul id="5cc184cb-f17b-440f-ab45-361f9ba4b56f" class="bulleted-list"><li style="list-style-type:disc">이진binary인 경우 boolean(T/F)</li></ul><p id="90d05793-f727-43f1-bedf-a5d24833de01" class="">새로운 변수에</p><ul id="ca8c8bee-eb7d-42e1-8902-d8ead61900fd" class="bulleted-list"><li style="list-style-type:disc">python loop</li></ul><ul id="928a6019-6599-4417-8bed-d44d48fb9d73" class="bulleted-list"><li style="list-style-type:disc">df.apply</li></ul><ul id="cfbe4ecc-80d0-4b83-a8c8-f287369a7306" class="bulleted-list"><li style="list-style-type:disc">vectorized</li></ul><p id="cb95ea34-b7d2-485f-994d-bc725acdbc21" class="">
+</p><blockquote id="2288f6f4-5cb1-410a-94fd-2364f1c839ad" class="">%%timeit  : 실행 시간 재는 <figure id="ed721414-a893-41e7-8488-924e0238b779"><a href="https://docs.python.org/3/library/timeit.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">timeit — Measure execution time of small code snippets</div><div class="bookmark-description">Source code: Lib/timeit.py This module provides a simple way to time small bits of Python code. It has both a Command-Line Interface as well as a callable one. It avoids a number of common traps fo...</div></div><div class="bookmark-href"><img src="https://docs.python.org/3/_static/py.svg" class="icon bookmark-icon"/>https://docs.python.org/3/library/timeit.html</div></div><img src="https://docs.python.org/3/_static/og-image.png" class="bookmark-image"/></a></figure></blockquote><p id="a8e1b692-97b5-4292-bf34-a9592afcd29d" class="">
+</p><p id="d4316dd5-317f-4a27-b8fd-f7cc668f7dd5" class="">
+</p><h2 id="13493628-125c-4cbd-b073-40e6226d6523" class="">04 자료 읽기 쓰기</h2><h3 id="9071fdaf-22c3-4e6b-bafb-4b0017087906" class="">BSA04 ReadWrite DataFiles</h3><p id="7c0f535a-6491-4169-8f3e-548cd5907072" class=""><em>Employee.csv 사용</em></p><p id="b7a0b115-2200-4659-b808-d8a69457fe41" class="">spark session 생성하고 나면 localhost:4040</p><p id="e594ffa2-9c1c-4bc7-92d4-3b62e836ae43" class="">스파크 데이터 읽어오기<div class="indented"><p id="e8975c74-da26-42c8-830b-b31cb1345da2" class="">$ hadoop fs -mkdir /Spark</p><p id="d2c70bf9-a106-41cf-bb60-83e41dec1ea7" class="">$ hadoop fs -put Employee.csv /Spark/spark_Employee.csv</p><p id="6a474317-134e-4cdd-b661-8a3b029851d1" class="">option ‘encoding’ ‘cp949’ ‘header’ ‘true’</p><p id="fa212e5c-ea4f-47d2-a1de-f483bf3c6d76" class="">hdfs://localhost:9000/Spark/spark_Employee.csv</p><p id="9689b226-3aa1-4dd7-8ede-82fdf39e4180" class="">스파크 데이터프레임.show() 해야 데이터 보임</p><p id="a4f92931-f645-4395-bb89-0b0daf3f3356" class="">.printSchema() 데이터 구조</p><p id="61856f37-6a5b-4855-a923-2b0202b65199" class="">
+</p></div></p><p id="22d0c2d7-4ce7-4c8c-8193-247cf6724dde" class="">pyarrow : 인메모리 열 형식 데이터 전송. 비활성화 되어있으므로 사용 설정.</p><p id="9d82384c-7344-4d20-acb6-a0d5ac1a9d0a" class="">pd ↔ spark</p><p id="3ba74f95-9cd6-44d4-8522-0ff2ee5052e1" class="">스파크DF.toPandas()</p><p id="be11870f-584f-4244-854f-b4d1c59c604f" class="">to스파크DF = 스파크.createDataFrame(판다스DF)</p><p id="6323d19b-35d6-41ae-af52-20a06fe853a8" class="">
+</p><h3 id="9a690743-9203-4c73-bbfd-a7b59d280060" class="">BSA04 ReadWrite Speed</h3><p id="aa3c6a20-d5d4-4033-8307-ee9dee7f572e" class="">빈 DF에 컬럼 이름 columns=[’read’,’write’]</p><p id="cab90ab3-a604-449a-b44e-5186519af598" class="">parquet가 빠르다. </p><p id="4a51c448-31db-41d5-923d-723a1468c280" class="">
+</p><p id="339c02be-ac9d-4666-8833-99b4e56586b7" class="">
+</p><h3 id="9ea2deba-f3ad-4879-9cd3-e42fe7de0157" class="">BSA04 Audio</h3><p id="f138b0bd-7f59-4c83-8c99-7417ebaec9ee" class="">
+</p><p id="b034e139-ff5a-4cf3-8cae-675c51b7381d" class="">
+</p><p id="744cae73-e3e5-4e4f-b8b2-1ac9c25f4ca1" class="">
+</p><h2 id="686f2f86-b6fe-4781-abf5-437a0403642d" class="">05 자료 전처리</h2><blockquote id="c811ed77-1359-4cf8-8e29-58a51d0942bb" class="">통계모델링이 가능한 형태로 자료를 변환</blockquote><p id="753af965-d37f-4b21-b5ae-bfdcb5d62e70" class="">
+</p><h3 id="bc451097-acf1-4948-b19d-f9d6bebc9870" class="">BSA05 Data Transform</h3><p id="cf832312-5151-4e87-b963-91907f69c266" class="">랜덤 난수 자료<div class="indented"><p id="2886cd68-992d-4b3e-b272-f06b3de6bff8" class="">seed 재현가능성 초기값 부여</p><p id="892336d3-bf0a-44eb-adc8-2b0c813bbb67" class="">size array shape</p><p id="afe1e73d-5c53-450f-8c13-3746077e2d09" class="">
+</p></div></p><p id="57a5bad8-107e-4297-a07d-21ed2a9e3312" class=""><em>housing.csv  PD_DF</em></p><p id="8c2a9bee-dbfd-4db3-8a0d-b3486afe7135" class="">명목자료 → 가변수 <div class="indented"><p id="84fef39f-1650-4e20-92c2-3a2c675e49af" class="">통계학습, k개의 범주 k-1개의 변수 / 기계학습, k개의 가변수 one-hot encoding</p><p id="5acfb5c3-e246-462c-99c7-3ef5e6c22ba1" class=""><code>.astype(’category’)</code> </p><p id="a2b92043-3aba-4570-976f-a8ae5787381e" class=""><code>.get_dummies(컬럼)</code> </p><p id="f7941c8a-afb7-4efa-b859-3a9fd7835316" class="">
+</p></div></p><p id="4e6bf75d-a0e3-4fb0-b4f8-0ca405deb464" class="">순서자료 → 등간격 수치<div class="indented"><p id="f352d146-e49a-483b-9dd9-b91f433adbda" class="">구간, 갯수, 비율로 나누기</p></div></p><p id="c0394498-f6c0-48cb-b68b-f2b863475d07" class="">
+</p><p id="f4be90ab-2ec4-4056-aa7c-0647765a4044" class="">변수의 종류 확인<div class="indented"><p id="83d71beb-4b95-4003-b551-8894cc246b01" class=""><code>DF._get_numeric_data().columns.tolist()</code></p><p id="da0e5aec-56f8-4a61-b85d-5170faab8239" class=""><code>DF.select_dtypes(include=np.number).columns.tolist()</code></p></div></p><p id="03ffcfb0-ba19-49d3-81f0-c3b353a014da" class="">
+</p><p id="0b17b277-b153-48f1-bedf-98ac99014d66" class="">표준화, 정규화</p><p id="9c140940-0eff-4c20-ac6c-78a1d2480fb3" class="">
+</p><p id="e8064a3e-044b-43a4-86c2-af6b4db94ee5" class="">시간자료<div class="indented"><p id="8f0895a1-0bc6-492c-9add-04b897b91df1" class="">형식, 간격 조정</p></div></p><p id="93673662-bd3c-4132-ac9e-9171ff7461e9" class="">
+</p><h3 id="50de7b18-1c35-4490-b9f5-76c22f8a168c" class="">BSA05 Missing Values</h3><blockquote id="604990e1-836c-4692-b753-8a39cf60ffd2" class="">결측값과 이상점</blockquote><p id="8f9d8d1e-453f-40d5-a130-b586c3fb5a79" class="">결측값 처리</p><ul id="6578827a-5e9c-4cec-a160-107da0fc5574" class="bulleted-list"><li style="list-style-type:disc">제거</li></ul><ul id="d1ec304d-56a6-4ed1-acf1-61356efd499f" class="bulleted-list"><li style="list-style-type:disc">대체</li></ul><p id="d8947111-f9f6-4b64-a0eb-155bf0e25e8b" class="">
+</p><p id="57c4fa4e-24b7-4dd9-a92f-a4358a2bf976" class="">제거</p><ul id="40466871-2f80-4672-9f7c-a31e6cd76074" class="bulleted-list"><li style="list-style-type:disc">행 제거 = 관측값 제거 = 레코드 제거<ul id="343d8895-0dcf-48a0-a0f0-9b7eb1abe6f1" class="bulleted-list"><li style="list-style-type:circle">모든 행이 NA</li></ul><ul id="2d89bec9-1ab3-45bf-acb3-509c6a6dc147" class="bulleted-list"><li style="list-style-type:circle">특정 변수가 NA</li></ul><ul id="ccdc79a1-279f-42a2-9367-5f63afa69985" class="bulleted-list"><li style="list-style-type:circle">NA가 몇개 이상</li></ul></li></ul><ul id="efb8d0ee-8713-45fc-8809-d322fa44e5fc" class="bulleted-list"><li style="list-style-type:disc">열 제거 = 변수 제거 = 필드 제거<ul id="97f74032-ae1f-4c82-986d-210cfba0ed13" class="bulleted-list"><li style="list-style-type:circle">dropna</li></ul><ul id="8a49eba9-eb6a-4fd6-888d-af0dee0075cc" class="bulleted-list"><li style="list-style-type:circle">특정 변수 값을 NaN으로 처리</li></ul></li></ul><p id="e7bf22a5-91bf-4a9b-b62e-879aa35947d5" class="">
+</p><p id="c0e0a3c5-6202-43e9-bd66-fd12b45710cf" class="">대체</p><p id="d93b76a9-32b4-40a0-8fc9-3ae7be85cfc1" class="">수치자료이고 다른 변수와 관련이 없는 경우 자기 참조</p><ul id="a48bf32e-14a4-41d4-b83a-4c4d0b79bff6" class="bulleted-list"><li style="list-style-type:disc">대체값 직접 지정<p id="d4cbbccc-271b-4e44-96bc-f6401aa4ddbb" class="">- 평균, 중앙값, 최빈값 문자일 땐 최빈값
+- 무작위(핫덱)</p></li></ul><ul id="002c7367-6445-4944-aca0-55273cc81303" class="bulleted-list"><li style="list-style-type:disc">전/후 관측값으로 대체<p id="3e1e6d91-9d8b-4c3d-bb53-612c8a0279a0" class="">: 관측값의 순서가 시간순인 경우</p><p id="4ccfa73c-0f25-4811-b97f-99ed036e693f" class="">
+</p></li></ul><p id="824689ee-5214-4c17-adc4-0b1eac3fe1f9" class="">다른 변수와 관련 있음</p><ul id="8813db97-8d8d-48be-bf4d-cc0f5999e047" class="bulleted-list"><li style="list-style-type:disc">회귀분석의 예측값 (+단차 약간의 변동을 추가해서 넣을 수도)</li></ul><ul id="71764f04-4294-41aa-a66c-4a94b82ca989" class="bulleted-list"><li style="list-style-type:disc">특정 통계값으로 대체</li></ul><p id="e0c6a337-79f0-47ef-99fd-c4caa0e20c4d" class="">
+</p><h3 id="4e57f9b1-03ac-4a91-b932-6ea82a08e4a4" class="">BSA05 Pyspark Missing Values</h3><p id="ab568337-8f85-435d-bc61-f59cf8e19be4" class="">결측 컬럼 | 값 삭제</p><p id="d635bd44-8619-4c65-a6b8-494a0bb85c2b" class="">결측값을 통계값으로 대체<div class="indented"><p id="9a885301-932b-45f5-8fdb-033e483abe6a" class="">수치변수만 Imputer로 ‘mean’ 대체</p></div></p><p id="417da88a-4da8-4af9-843d-b7c686275c18" class="">
+</p><h3 id="8b4491a2-4cac-48d7-9c90-dbf28b91224a" class="">BSA05 Combine DataFrame</h3><blockquote id="fb41ed75-290d-4e58-9b7f-6b65ce9038e7" class="">pandas로 데이터 프레임 붙이기</blockquote><p id="44768edf-9754-4040-b6d8-4a59a9561d8a" class="">위-아래 붙이기 concat axis=0</p><pre id="170efa4f-7a02-4399-a94b-41fdc75a90c5" class="code"><code>df = pd.concat([df1,df2], ignore_index=True, keys=([”데이터1”, “데이터2”])).drop_duplicates() # 위아래로 붙이고 index는 새로. df에 key값 넣고 중복 삭제.
+df1, df3에 다른 변수가 있는 경우
+df = pd.concat( [df1, df3], join = ‘inner’) # 모든 df에 있는 변수만 합침</code></pre><p id="0219eb04-34c9-4220-9169-7b36d146be5d" class="">
+</p><p id="378985ae-f4db-4d5a-b125-f57c2e1e1cdf" class="">좌우 붙이기 merge axis=1</p><pre id="3a3d5287-2af6-464c-ae0e-fad8e6d8a8ac" class="code"><code>df = pd.merge(df1, df2) # 동일한 변수 있는 지 확인 후, 같은 자료만 좌우 결합
+df = pd.merge(df1, df2, on=[”학번”], how=’inner’) #교집합
+df = pd.merge(df1, df2, on=[”학번”], suffixes=[”_l”, “_r”], how=’outer’)
+df = pd.merge(df1, df5, left_on=”학번”, right_on=”ID”, how=’right’)</code></pre><p id="593c32b2-8413-4302-b862-02b8cb4a166c" class="">
+</p><p id="2bfb11e2-ae3d-42b8-8020-52f589eb83b9" class="">스파크</p><pre id="bb45152b-cf88-466d-9080-13e94f2e0d16" class="code"><code>import pyspark
+from pysaprk.sql import sparksession
+스파크 = SparkSession.builder.appName(&#x27;mergeDF&#x27;).getOrCreate()
+스파크.conf.set(&quot;spark.sql.execution.arrow.enabled&quot;, &quot;true&quot;)
+
+스파크DF1 = 스파크.read.option(&#x27;header&#x27;,&#x27;true&#x27;).csv(&quot;hdfs://localhost:9000/Spark/combinedata/data1.csv&quot;)
+스파크DF2 = 스파크.read.option(&#x27;header&#x27;,&#x27;true&#x27;).csv(&quot;hdfs://localhost:9000/Spark/combinedata/data2.csv&quot;)
+스파크DF3 = 스파크.read.csv(&quot;hdfs://localhost:9000/Spark/combinedata/data3.csv&quot;
+,encoding=&#x27;cp949&#x27;,inferSchema=True, header=True)
+
+# 동일한 스키마 세로 연결
+DF = 스파크DF1.union(스파크DF2) # 중복 행 있을 수 있음
+DF = 스파크DF1.unionAll(스파크DF2) # 모든 행
+DF = 스파크DF1.union(스파크DF2).distinct() # 중복 컬럼 삭제
+DF = 스파크DF2.unionByName(스파크DF3, allowwMissingColumns=True) # 빈 컬럼이 있어도 됨
+
+# 가로 병합 axis=1
+스파크DF1.join(스파크DF2)
+DF = 스파크DF1.join(스파크DF3, 스파크DF1.학번==스파크DF3.학번)
+DF = 스파크DF1.join(스파크DF3, 스파크DF1.학번==스파크DF3.학번, &quot;inner&quot;)
+DF = 스파크DF1.join(스파크DF3, 스파크DF1.학번==스파크DF3.학번, &quot;outer&quot;)
+DF = 스파크DF1.join(스파크DF3, 스파크DF1.학번==스파크DF3.학번, &quot;left&quot;)
+DF = 스파크DF1.join(스파크DF3, 스파크DF1.학번==스파크DF3.학번, &quot;right&quot;)</code></pre><p id="60a879e6-57bd-4b0b-bc1e-3d118f0f844d" class="">
+</p><h3 id="4ce5f3e4-5456-487d-9935-8bcb7a1634fe" class="">BSA05 Imbalanced Resampling</h3><blockquote id="fe3dbaf6-7db3-4be4-b2a5-5f0eec6f476b" class="">불균형자료 minority class가 majority class보다 현저히 적음</blockquote><p id="f4d659b6-f0c0-4861-b5af-48f55377bc21" class="">오차를 최소화 하다 보면 다 major로 분류됨</p><p id="594483ef-bef6-482e-bea9-cb66aef574b5" class=""><code>from imblearn.*** import ****</code></p><p id="5e68deb8-10be-4a3e-8c32-deee8909967b" class=""><code>PD_DF.info()</code></p><p id="154ef288-c7e5-485b-b65d-547d6c842f60" class=""><code>.astype(’float32’)</code></p><ol type="1" id="3e9fe5ff-72ee-40a7-978f-323dba8d1862" class="numbered-list" start="1"><li>행번호(row number)로 선택하는 방법 (.iloc) [행, 열]</li></ol><ol type="1" id="70d9b2f4-8033-4318-aacd-3db4397bab15" class="numbered-list" start="2"><li>label이나 조건표현으로 선택하는 방법 (.loc) <code>data[data[&#x27;first_name&#x27;] == &#x27;Antonio&#x27;, [&#x27;email&#x27;]]</code> 반환형식 df 유지</li></ol><ol type="1" id="ddf064f6-23ff-4b65-ad76-44bfd98058cd" class="numbered-list" start="3"><li></li></ol><h3 id="b3b39ba8-798a-49a2-b1e6-03e125edc108" class="">BSA05 Dimention Reduction</h3><blockquote id="9e12748a-0dd5-4ff8-a53c-a2ac83b5c1ac" class="">다 안해서 결과 부족</blockquote><p id="622d0e04-f473-4c6b-ae6b-b49668eda1b5" class="">import statsmodels.api as sm</p><p id="f9369bd0-fb50-44a0-9313-af75694afda6" class="">sm.Logit</p><p id="b3c67770-4ee7-4093-9e9b-8d5f01257496" class="">차원 축소 자료에 대한 로지스틱 회귀분석</p><p id="c11dbef6-d6b9-4fc2-8d3b-53b7ee473250" class="">from sklearn</p><p id="d1002f67-50b1-4029-a2cc-0e0aa7be0b9f" class="">
+</p><h2 id="f2370638-24fc-465e-b46b-6a99ea2237c6" class="">06 그래프</h2><h3 id="661e06ad-92c8-488e-9fa6-f64cca8636e6" class="">BSA06 Pandas EDA</h3><blockquote id="d61a8ddf-c8d6-4a2d-bad2-25779230c0a9" class="">여러 컬럼은 리스트로 [”컬럼1”, “컬럼2”] 패턴<p id="aff3f81c-d26b-4d3a-8e44-49a8fca501da" class="">각각 지정할 땐 사전 {”컬럼1”: [”함수1”, “함수2”], …}</p><p id="9eda29eb-6123-4917-8dce-b6d8406bdc20" class="">apply는 함수를 적용, agg는 함수값을 구함</p></blockquote><pre id="668c4c66-b84e-487c-95fa-8882371c7eb4" class="code"><code>import pandas as pd
+import seaborn as sns
+
+팁 = sns.load_dataset(&#x27;tips&#x27;)
+
+팁.describe() # 수치자료에 대한 통계값들
+팁.dtypes # each column&#x27;s data type
+팁.describe(include=&quot;all&quot;) # 범주형 자료에 대해서도 요약
+
+팁[tip].describe() 
+팁[tip].unique() 
+팁[tip].value_counts() 
+팁[[&#x27;sex&#x27;,&#x27;smoker&#x27;,&#x27;day&#x27;,&#x27;time&#x27;]].value_counts()
+
+팁.corr(numeric_only=True)
+
+# 그룹별
+팁.groupby(&#x27;sex&#x27;).mean(numeric_only=True)
+for 성별, 그룹 in 팁.groupby(&#x27;sex&#x27;):  # DF를 쪼갠다. 여기선 Male|Female
+    print(성별)
+    display(그룹.head())  # 디스플레이 함수에 넣어야만 보임
+
+# 다중 통계 .agg
+# count, sum, mean, median, var, std, min, max, unique, nunique, prod, first, last
+팁.groupby(&#x27;sex&#x27;).agg([&#x27;mean&#x27;, &#x27;std&#x27;])  
+팁.groupby(&#x27;sex&#x27;).agg({&#x27;total_bill&#x27;: [&#x27;mean&#x27;,&#x27;std&#x27;], &#x27;tip&#x27;: &#x27;median&#x27;, &#x27;size&#x27;: &#x27;sum&#x27; })
+팁.groupby(&#x27;sex&#x27;)[[&#x27;total_bill&#x27;, &#x27;tip&#x27;]].agg(lambda x: x.std()/x.mean()) # 두 범주에 대한 상관계수
+
+타이타닉.isna().sum()
+타이타닉.groupby([&#x27;sex&#x27;,&#x27;class&#x27;],group_keys=False)[&#x27;age&#x27;].apply(lambda x: x.fillna(x.mean()))
+팁.groupby([&#x27;sex&#x27;,&#x27;time&#x27;],group_keys=False)[&#x27;tip&#x27;].apply(lambda x: (x-x.mean())/x.std())
+
+# 정렬
+팁.sort_values(by=[&quot;sex&quot;,&quot;tip&quot;],ascending=[True, False]).head()
+</code></pre><p id="21f068ff-dc86-498a-a128-268a1ddbfa85" class="">count 컬럼 별 총 데이터 수</p><p id="6325bfdc-ceaf-4547-b5b4-1d0d75573074" class="">mean, std 컬럼별 데이터 평균, 표준편차</p><p id="fbbfc76b-0390-4793-a11c-34bff10a2ae0" class="">25%, 50%, 75% 백분위수의 각 지점으로, 분포를 반영해 평균을 보완하는 목적으로 사용</p><p id="8437facd-da2e-4ddf-a1a1-1fbe53204838" class="">
+</p><h3 id="5ced91a2-9210-43b2-adfb-d74773f156b9" class="">BSA06 Pyspark EDA</h3><pre id="f129e3e5-ee2d-45a7-9295-b72d7b5e190e" class="code"><code>DF스파크 = 스파크.read.option(&#x27;encoding&#x27;,&#x27;cp949&#x27;).option(&#x27;header&#x27;,&#x27;true&#x27;)
+	.csv(&quot;Employee.csv&quot;,inferSchema=True)
+DF스파크.show()
+DF스파크.head(5)
+DF스파크.select(&#x27;id&#x27;).show() # 데이터프레임 타입
+DF스파크.printSchema()
+DF스파크.dtypes
+DF스파크.describe().show()
+
+# 컬럼
+DF스파크.columns
+DF스파크 = DF스파크.withColumn(&#x27;jobtime2&#x27;,DF스파크[&#x27;jobtime&#x27;]*2) # 추가
+DF복사.withColumn(&quot;salary_STD&quot;,(col(&quot;salary&quot;)-평균)/표준편차).show() # 표준화 컬럼 추가
+DF스파크 = DF스파크.withColumnRenamed(&#x27;jobtime2&#x27;,&#x27;jobtime3&#x27;) # 이름 변경
+DF스파크 = DF스파크.drop(&#x27;jobtime3&#x27;) # 제거
+
+# 조건
+DF스파크.filter(&quot;salary &lt;= 30000&quot;).show()
+DF스파크.where(&quot;salary &lt;= 30000&quot;).show() # 위와 같음
+DF스파크.filter(&quot;salary &lt;= 50000&quot;).select([&#x27;gender&#x27;,&#x27;jobcat&#x27;]).show()
+DF스파크.filter(DF스파크[&#x27;salary&#x27;] &lt;= 30000).show()
+DF스파크.filter((DF스파크[&#x27;salary&#x27;] &lt;= 30000) &amp; (DF스파크[&#x27;salary&#x27;] &gt;= 25000)).show() 
+DF스파크.filter(~(DF스파크[&#x27;salary&#x27;] &lt;= 30000)).show() # ~ not
+
+# 그룹
+DF스파크.groupBy(&#x27;gender&#x27;).count().show()
+DF스파크.groupBy(&#x27;gender&#x27;).mean().show()
+DF스파크.groupBy(&#x27;gender&#x27;).mean(&#x27;salary&#x27;).show()
+DF스파크.groupBy([&#x27;gender&#x27;,&#x27;jobcat&#x27;]).max().show()  # 임금 차이 $  성별, 직업도 영항을 준다
+
+# 함수 적용
+DF스파크.agg({&#x27;salary&#x27;:&#x27;mean&#x27;, &#x27;salbegin&#x27;:&#x27;min&#x27;}).show()
+
+# 정렬
+DF스파크.orderBy(&quot;salary&quot;,ascending=False).show()
+DF스파크.orderBy(&quot;educ&quot;,&quot;salary&quot;,ascending=[False,False]).show()
+
+# 복사
+DF복사 = DF스파크.select(&quot;*&quot;) # 모든 변수를
+from pyspark.sql.functions import avg, col, stddev
+평균 = DF복사.select(avg(col(&quot;salary&quot;)))
+평균.show()
+# 평균 = DF복사.select(avg(col(&quot;salary&quot;))).first()[0]
+print(평균.first())
+</code></pre><p id="ea7580ea-1d91-4855-abc5-2fb32cad7377" class="">
+</p><h3 id="7fb8a05a-b01b-4688-b0cd-156d3c04416b" class="">BSA03 Dashboard CO2</h3><p id="5790439a-fa25-4fb6-a9c8-965f89c5da8e" class="">import panel as pn</p><p id="dac2331d-a27e-46fb-ad7b-9428158714c6" class="">import hvplot.pandas</p><p id="a7685324-bb35-439c-8980-6b02b524675c" class="">
+</p><p id="8cb18d17-ca2a-425b-98ed-94e1d3ad96ca" class="">df.rename(columns={})</p><p id="36ae5470-386b-4dce-a4b2-8cf851c126c6" class="">df[”인당GDP”] </p><p id="d754e0ce-5a7a-4e8c-9e9c-d7cfef85abdf" class="">
+</p><p id="20718354-abe4-43a3-9f37-d3c134d487c2" class="">df.interactive() # interactive pipeline</p><p id="68a43748-dbd2-4e15-bf76-06abbc922061" class="">
+</p><p id="c8fc2b2f-cfce-4237-9e23-a8dcdba5d195" class="">파이프라인_co2 → 시계열그림_co2</p><p id="ec02c71c-e18d-4092-9456-0fb51a6c6a7f" class="">표_co2</p><p id="ced3ece4-2dd0-47e5-bc5b-c85ffeb85efd" class="">산점도_co2</p><p id="9972857d-6384-4052-9391-5b1ed5157730" class="">막대그래프_co2</p><p id="c92a6500-25a9-4fd8-bae8-9db6d3bfc25b" class="">
+</p><p id="7292b901-4a75-41e0-b017-b53f03f69a20" class="">template.servable()</p><p id="febcb6d4-31c5-41de-86aa-f9841d22c1a3" class="">
+</p><h3 id="1afb8b08-4beb-47f4-8277-a6166394f30d" class="">BSA06 Word Cloud</h3><ul id="d25b1e76-3410-48dc-9d88-ccb1e5fa295a" class="bulleted-list"><li style="list-style-type:disc">한글 폰트 지정</li></ul><p id="f63df4a0-3a7d-49e9-a7e9-4be841f0e07c" class="">형태소 분석</p><p id="afa8c50a-f6cc-4fed-9e97-84f97e57f9cc" class="">Okt를 이용한 문장처리
+</p><h3 id="6051097e-6e9d-4c06-b674-5e4646ba52e5" class="">BSA06 Matplotlib Korean</h3><ul id="f38d675e-b9e8-4670-aa31-2865b28bf68e" class="bulleted-list"><li style="list-style-type:disc">matplotlib에서 한글 처리 rc 모듈 사용</li></ul><p id="9555790d-84ab-43b8-bb28-cbfb3b442df6" class="">
+</p><h3 id="0fe829d2-da7d-4a83-8483-d8fd3f44ca94" class="">BSA05 Housing Project</h3><blockquote id="df5925c0-49b6-4c29-b478-60e93db08154" class="">캘리포니아 집값 예측. 선형 회귀 및 의사 결정 트리 모델.</blockquote><p id="1aa9a439-bcbd-4fc1-bdcf-ab283b5ca458" class="">스파크 → 판다스</p><p id="b31dbf40-e2c5-4e72-a4d9-d43b6380b625" class="">
+</p><p id="0d66bba7-bb51-4469-ae7a-b5b9da35f6f4" class="">회귀분석<div class="indented"><p id="067046c3-8af5-46f3-9646-8fedab74044a" class="">학습/검증 자료 분리</p><p id="1e67c253-f7d8-4338-857b-589a30d55f0e" class=""><code>from sklearn.linear_model import LinearRegression</code></p><p id="544a2a71-b633-4d16-a3db-52a129c699b7" class="">obs 기존값 pred 예측값 concat</p></div></p><p id="d99572c6-aa84-4afb-b9b9-6f26d85a3f22" class="">
+</p><p id="7d127454-e5df-482d-8a40-1bec534247f2" class=""><strong><strong>최소 제곱법 (Least Square Method = OLS)</strong></strong><div class="indented"><blockquote id="15bd96ca-181e-4b33-bc35-027569b7c688" class=""><strong>오차를 최소화 시키는 방법으로 회귀 계수(β0,β1�0,�1)를 추정하는 기법입니다.</strong></blockquote><p id="8e4d29d4-3315-4eb3-9859-1771e18be684" class=""><code>import statsmodels.api as sm</code></p></div></p><p id="f03de1ea-b427-48b9-b93d-a53a0c407324" class="">
+</p><p id="5fd809af-1185-44b6-a8a1-1e1ccddfad6e" class="">데이터 시각화<div class="indented"><p id="75dfabef-5863-4f36-b99f-aada0178684d" class=""><code>import matplotlib.pyplot as plt</code></p><p id="e2a8434c-9373-4dd9-b683-6bfeb6445418" class="">그래프</p><p id="dca7ee6d-96e2-42a0-829c-f4c14b03ebee" class=""><code>import  folium</code></p><p id="72f1f1ef-a80b-4b56-9c82-a3d6c3dc8cb2" class=""><code>folium.Map</code></p></div></p><p id="1e3b924d-70b0-402f-b2f7-86ec4f95e5c5" class="">
+</p><h2 id="90179ec6-2735-448d-829a-54c7970eb9fe" class="">07 NLP</h2><h3 id="d39f9c5f-68a0-488f-8560-f57c33a77531" class="">BSA07 Python SMS Spam</h3><blockquote id="ae41c38d-1b60-40b0-a200-b0b411adcd24" class="">pandas</blockquote><pre id="5317a459-5628-430b-b2eb-d7847ecc3f68" class="code"><code>import pandas as pd
+import numpy as np
+import re # 정규식 실행 함수
+
+import nltk
+from nltk.corpus import stopwords
+#nltk.download(&#x27;stopwords&#x27;) # 한번만 다운
+
+df = pd.read_table(&quot;SMSSpamCollection&quot;,header=None,sep=&quot;\t&quot;)
+df.head()
+df = df.rename(columns={0: &#x27;label&#x27;,1: &#x27;messages&#x27;})
+df.isnull().sum()
+STOPWORDS = set(stopwords.words(&#x27;english&#x27;))
+
+def 불용어제거(텍스트):
+    # 소문자로 변환
+    텍스트 = 텍스트.lower()
+    # 특수문자 제거
+    텍스트 = re.sub(r&#x27;[^0-9a-zA-Z]&#x27;, &#x27; &#x27;, 텍스트)
+    # 추가 빈 칸 제거
+    텍스트 = re.sub(r&#x27;\s+&#x27;, &#x27; &#x27;, 텍스트)
+    # remove stopwords
+    텍스트 = &quot; &quot;.join(word for word in 텍스트.split() if word not in STOPWORDS)
+    return 텍스트
+
+df[&#x27;processed&#x27;] = df[&#x27;messages&#x27;].apply(불용어제거)
+
+# 분할
+X = df[&#x27;processed&#x27;]
+y = df[&#x27;label&#x27;]
+
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import classification_report
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, TfidfTransformer
+
+def SMS분류(model, X, y):
+    # train test split
+    x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=316, shuffle=True, stratify=y)
+		# BOW 문서를 숫자 벡터로 변환
+    pipeline_model = Pipeline([(&#x27;vect&#x27;, CountVectorizer()), 
+                               (&#x27;tfidf&#x27;,TfidfTransformer()),
+                               (&#x27;clf&#x27;, model)])
+
+    # model training
+    pipeline_model.fit(x_train, y_train)    
+    print(&#x27;Accuracy:&#x27;, pipeline_model.score(x_test, y_test)*100)    
+    
+		# 설명 변수로 모형 적용. 예측
+    y_pred = pipeline_model.predict(x_test)
+    print(classification_report(y_test, y_pred))
+    
+		# 검증 자료로 정확도 계산
+		# cv_score : 정확도, 정밀도, 재현률, F1(precision, recall 조화평균)
+				# , label별 합의 평균, 전체 평균
+    cv_score = cross_val_score(pipeline_model, X, y, cv=5)
+    print(&quot;CV Score:&quot;, np.mean(cv_score)*100)
+
+# Logistic regression
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+SMS분류(model, X, y)
+
+# Support Vector Machine
+from sklearn.svm import SVC
+model = SVC(C=3)
+SMS분류(model, X, y)
+
+# Random Forest
+from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier()
+SMS분류(model, X, y)
+
+예측label = SMS예측(model, x_train, y_train, x_test)
+print(type(y_test),type(예측label))
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score, recall_score, f1_score
+
+혼동행렬 = confusion_matrix(y_test, 예측label)
+print(혼동행렬)
+
+print(&quot;Precision:&quot;,precision_score(y_test, 예측label, pos_label=&quot;ham&quot;))
+print(&quot;Recall:&quot;,recall_score(y_test, 예측label, pos_label=&quot;ham&quot;))
+print(&quot;F1:&quot;,f1_score(y_test, 예측label, pos_label=&quot;ham&quot;))</code></pre><p id="87235498-ec37-4690-9a85-4d20d3aee08f" class="">벡터화 할 때 옵션들 : vocabulary=단어장, analyzer=&#x27;word&#x27;, ngram_range=(2, 2), stop_words = &#x27;english&#x27;</p><pre id="c72b9f16-3ed1-48b5-aea8-1c948a8db997" class="code"><code>## Accuracy
+
+혼동행렬(Confusion matrix)
+
+분류 \ 실제 | Positive | Negative
+---------|--------|--------
+Pasitive |  TP  | FP
+Negative |  FN  | TN
+
+- 정확도(accuracy) = (TP+TN)/(TP+FN+FP+TN)
+- 정밀도(precision) = TP/(TP+FP)
+- 재현율(recall, sensitivity) = TP/(TP+FN)
+- F1 = 2 (precision x recall)/(precision+recall)
+    - precision과 recall의 조화평균, imbalanced 구조인 경우 많이 사용
+- macro: label별 각 합의 평균
+- micro: 전체평균</code></pre><h3 id="a2e597c8-4987-4ca7-af43-66faffd31e65" class="">BSA07 Pyspark SMS Spam</h3><p id="abe243a0-57b5-4e52-b538-cddb631eeeb6" class="">pyspark 켜기</p><p id="b6e162d3-84ad-45ee-99a3-c6872c165d1f" class="">데이터 읽고 columns 변경</p><p id="fc4472ff-33ec-479a-8162-16ced9889201" class="">tokenizer 토큰 개수 계산</p><p id="01913fc4-37f4-47dc-a9b9-bd47ca9bea56" class="">stopword 제거</p><p id="7c72a19a-de56-4949-ba7f-f5ccb49fd4a4" class="">TF-IDF(Term Frequency - Inverse Document Frequency)는 <strong>정보 검색과 텍스트 마이닝에서 이용하는 가중치</strong>로, 여러 문서로 이루어진 문서군이 있을 때 어떤 단어가 특정 문서 내에서 얼마나 중요한 것인지를 나타내는 통계적 수치이다.</p><p id="1e6aea05-94bb-4a2f-b7e2-ddee98e2d2ce" class="">VectorAssembler</p><p id="91dd89ab-1a47-47b7-985f-19947c290c3a" class="">만들어놓은 것들을 파이프라인에 담아서 <code>.fit(df)</code> <code>.transform(df)</code> 하고 train_df, test_df 으로 나눔</p><p id="5939bc4f-c536-4dde-b9c9-b8cfba07c106" class="">
+</p><h3 id="d30cf6e6-d2c8-4743-ad3c-5fe3faef5693" class="">BSA07 NLP</h3><blockquote id="00b9859a-6484-420a-8da4-ea895c1391f9" class="">일반적인 NLP 전처리 방법</blockquote><h3 id="54691fee-04af-4379-90eb-23d9b8fca3f4" class="">BSA07 Pyspark NLP</h3><p id="d8b11e36-63d1-4492-bccb-8ff574ace1e1" class="">
+</p><h2 id="725c8be4-6f4b-4e43-812b-85eace56695d" class="">08 통계 모델링</h2><h3 id="96d762b2-efa3-40ad-ba9f-dbf90f5fd62e" class="">통계모형</h3><p id="c8efb0d9-d299-4b81-9173-d23e9e4b22a0" class="">반응변수, 설명변수가 양적변수냐, 질적변수냐에 따라 분석모형이 달라진다.</p><p id="384c5db1-5b1f-420d-8f8c-ef4694d90ede" class="">반응변수가 질적변수면 아무래도 분류 문제곘지.</p><p id="d3b197cd-5508-4b60-a59b-0c2e9436b5ce" class="">
+</p><h3 id="ca09c2ad-55e8-410e-84f8-c3c634f3c635" class="">패키지</h3><p id="d8ce9ffe-f5be-49f9-abc3-b09cb684a2d4" class="">scikit-learn</p><ul id="c162a4f6-e1f3-4800-8f46-a07a43195ff5" class="bulleted-list"><li style="list-style-type:disc">machine learning</li></ul><p id="2541a13f-e880-4572-86ff-6531e5d7aefe" class="">statsmodels</p><ul id="30cd2e3a-6d35-475e-8d23-3dfe99d1a628" class="bulleted-list"><li style="list-style-type:disc">statistical</li></ul><p id="280bfeec-5cf4-4273-8ce1-63faf528a310" class="">
+</p><div id="e6d73b7d-b4ff-4ee5-8f88-e8fc5ece038d" class="column-list"><div id="1069c175-27c8-4991-b0e8-a5332bf1cf11" style="width:33.333333333333336%" class="column"><p id="2e4eb03e-cc0d-42de-b58b-0277d715c116" class=""><strong>지도 학습</strong></p><blockquote id="aab59ba4-f062-4306-aed5-96207e1bc1b9" class="">데이터에 대한 label이 주어진 상태에서 학습</blockquote><p id="54f485a3-7b8e-414f-8a79-2d61ab14024a" class="">label = 반응변수 <div class="indented"><p id="6281396a-dedb-4ba1-a2ed-4a805dca45f5" class="">범주형 ⇒ classification, 수치형 ⇒ regression</p></div></p><p id="3715a4ab-448b-4284-aefc-0286ba17d7fe" class="">train 모형 구축/test data 성능 확인</p><p id="6bf6164f-497d-4434-97cf-94a408bd3596" class="">unknown인 label을 예측하는게 목표</p><ul id="a69b29ef-4168-49ad-92a9-2ab177e11cbc" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong>decision tree</strong></strong></strong></li></ul><ul id="99cf9122-51bd-4a67-bb58-6a90e49f94df" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong>logistic regression</strong></strong></strong></li></ul></div><div id="5d0329b6-367d-4e75-b9aa-b6cb47d5ae01" style="width:33.333333333333336%" class="column"><p id="7306c112-a5ae-4c67-8110-e53e82b4d3ed" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>비지도 학습</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><ul id="48c44ff8-3cfa-46b3-b68e-dbd1df6a0f0b" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>clustering analysis</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></li></ul><p id="3a96d159-ab66-474d-b508-2571881cb3ee" class="">데이터의 숨겨진 특징feature나 구조를 발견하는데 사용</p><p id="743d9598-06af-4b5a-83ef-4b2dcba5876b" class="">
+</p></div><div id="2ffad526-c14b-41e1-a323-af00cea082f8" style="width:33.33333333333333%" class="column"><p id="0cb7dcb8-8ed0-44a3-89e0-af0b641ce9de" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>강화 학습</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><blockquote id="096fc1c2-1017-4ee5-805e-abd202c42691" class="">에이전트가 주어진 환경(state)에 대해 어떤 행동(action)을 취하고 이로부터
+어떤 보상(reward)을 얻으면서 학습을 진행<p id="12cfef16-62d6-434e-82a6-0c99068f12f5" class="">에이전트는 보상(reward)을 최대화(maximize)하도록 학습이 진행</p></blockquote><p id="6d2edb16-9a1c-4f24-95a9-fb1df8d611d8" class="">강화학습은 일종의 동적인 상태(dynamic environment)에서 데이터를
+수집하는 과정까지 포함되어 있는 알고리즘</p><p id="c86eed93-4d91-4331-b5f7-e4a79cdb4d4a" class="">
+</p></div></div><p id="65e3a8d8-649b-4e3d-ac38-a8b2439d7754" class="">
+</p><div id="a45a1a39-59ba-4490-968a-b485cabe911c" class="column-list"><div id="7101678c-fef6-4217-8b5d-f63c396ca356" style="width:50%" class="column"><p id="8f4f05ea-b76e-48fe-80e2-dc7c0818c7cd" class="">분류</p><p id="95fd5dc1-a94b-4f23-b6c9-1bdae96abf31" class="">어느 모집단에서 추출되었는지 모르는 새로운 관측값을 여러 모집단 중 하나에 할당 ⇒ 분류함수 ← 이것도 판별함수를 사용</p></div><div id="0b944446-d688-4e1b-8b8e-d807c6444415" style="width:50%" class="column"><p id="b0bbf1b0-00d0-497e-992c-d6bec2562be4" class="">판별</p><p id="a505129a-8469-4ea1-b661-b068a29a4a5e" class="">잘못 분류될 확률 또는 잘못 분류함에 따라 발생하는 비용을 최소화 ⇒ 판별함수</p></div></div><p id="2618b67e-13b6-4f1e-8a55-40a16a185f34" class="">주요 판별 함수</p><figure id="9a3994e9-320c-4cd5-bb0e-130ef1cedfae" class="image"><a href="%E1%84%87%E1%85%B5%E1%86%A8%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5%E1%84%90%E1%85%A9%E1%86%BC%E1%84%80%E1%85%A8%E1%84%87%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%E1%86%A8%207bf49625dac547b48f38ceac3bebf12a/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-05-31_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_2.06.08.png"><img style="width:1166px" src="%E1%84%87%E1%85%B5%E1%86%A8%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5%E1%84%90%E1%85%A9%E1%86%BC%E1%84%80%E1%85%A8%E1%84%87%E1%85%AE%E1%86%AB%E1%84%89%E1%85%A5%E1%86%A8%207bf49625dac547b48f38ceac3bebf12a/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-05-31_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_2.06.08.png"/></a></figure><p id="b4f19d4d-3101-4c0b-96bc-f845c151e992" class="">
+</p><p id="7136a09a-e84a-40b5-8d95-ee4bb404adf0" class="">의사결정나무모형</p><blockquote id="acfb09c8-9dce-4a59-9a97-8c2a29c59dfd" class="">노드, 가지, 깊이</blockquote><ul id="5fb6a49f-6733-4f14-895e-d2e5ae94b5c9" class="bulleted-list"><li style="list-style-type:disc">어떻게 splitting variable, threshold를 결정할지</li></ul><ul id="48efc8fc-1be1-419e-9c8f-e86028299d1f" class="bulleted-list"><li style="list-style-type:disc">stoping rule, pruning rule</li></ul><p id="ffb631ad-637a-409c-a3ef-ff2826abd667" class="">label 범주 → 분류나무 | 수치 → 회귀나무</p><p id="dc145463-6b70-4841-91b1-ad03fee34c18" class="">분류나무<div class="indented"><p id="43f72c06-7598-4476-968a-2e5cb99909df" class="">분리 기준</p><p id="088f116a-6087-4361-a03d-afd0cc13591f" class="">각 노드에 속하는 자료가 분할하면서 자람</p><p id="444b0973-80c4-48a5-90be-693633ff726f" class="">자료의 순수도 purity 증가</p><p id="8f6c81ce-9992-4e9d-ae1c-ec1fba7482ae" class="">반대 개념인 불순도 impurity 측도 사용</p></div></p><p id="442417b0-5382-42e5-acb9-caca37361758" class="">
+</p><p id="5fabf19b-1fe3-4f40-a2fc-f3aa2af795a4" class="">ensemble 모형</p><p id="5b1c00e3-3a78-4e5a-93e2-c87bcff8b691" class="">
+</p><p id="1ece5499-d26c-4c61-b7fb-eff7124914e9" class="">Bagging</p><blockquote id="c18c5131-9a91-4f7f-9004-f2a0c309094c" class="">각 분류모형의 결과를 종합하여 한 가지 class 결정. <p id="f715e97f-eb0a-4358-8506-75d921cc4836" class="">균일한 확률분포에 따라 data set으로부터 반복적으로 복원추출을 수행하는
+기법</p></blockquote><p id="77685c4b-ccc5-4584-b5bb-5bc23118cce8" class="">Boosting</p><blockquote id="9f9874b5-0ba1-46b9-b726-62fbb3737fe6" class="">Boosting도 bootstrap sample을 이용하여 여러 개의 classifiers를 이용하여
+하나의 classifier를 생성하는 앙상블 알고리즘</blockquote><p id="ff3fe87f-4b95-4623-8d64-d600082de5bf" class="">
+</p><p id="33541040-17ee-4d78-b92f-dc0238a77566" class="">Random Forest</p><blockquote id="ebab66ac-bbdd-4147-9d6a-1a2917106c20" class="">의사결정나무 분류기를 위해 특별히 설계된 앙상블기법</blockquote><p id="c5026129-0a3f-4fc4-bdb0-280da3a68e3b" class="">
+</p><p id="463b7dbf-cef4-45ae-94f5-9c53c6cf0e9a" class="">Cluster Analysis</p><blockquote id="91f4ace3-e74c-4e4d-be7e-af7ccdeb95c7" class="">모집단 또는 범주에 대한 사전정보가 없는 경우에 관측값들 사이의
+거리(또는 유사성)를 이용하여 전체를 몇 개의 그룹 또는 군집으로 나누는
+분석법</blockquote><p id="57d4ab90-1277-41fe-aa79-d8d0d72b1515" class="">
+</p><p id="7e879d7e-7fe2-4574-a0ba-71d27bf1bb17" class="">Support Vector Machine(SVM)</p><blockquote id="60b4417b-22f0-476d-a2c9-064bd1022818" class="">로지스틱 회귀와 달리 확률 추정을 하지 않고 직접 분류 결과에 대한 예측</blockquote><p id="c9359aba-26d9-4e24-aa28-e2d4f09f08ad" class="">벌점화 기법의 하나이며, 계산량이 자료의 수에 비례하지만 차원의 크기에는 덜 민감(n ≪ p의 경우 유용)</p><ul id="14605242-50ee-45c8-965a-165ad1962396" class="bulleted-list"><li style="list-style-type:disc">선형 분리 가능</li></ul><ul id="c73ae295-3a8b-42b9-8c64-3b60d17e5052" class="bulleted-list"><li style="list-style-type:disc">선형 분리 불가능</li></ul><p id="3f4f27ca-3345-44f4-a873-98edfbc063c1" class="">
+</p><p id="97bbee96-b9ee-4d06-968c-b60dc0244dfd" class="">카프카 데이터 스트리밍</p><ol type="1" id="6701e408-6fb1-40d7-be3c-328457547116" class="numbered-list" start="1"><li>압축 파일 다운로드</li></ol><ol type="1" id="728ce342-0681-46e0-b38a-1703e70b5ada" class="numbered-list" start="2"><li>폴더에 복사 후 환경설정 [사용자변수, 시스템변수]</li></ol><ol type="1" id="0998cde6-3e2b-4064-b82e-471d116a31b2" class="numbered-list" start="3"><li>카프카 환경 실행<ol type="a" id="04d64111-7bc8-42a9-838c-7c4aace5f874" class="numbered-list" start="1"><li>zookeeper</li></ol></li></ol><ol type="1" id="b23ec27f-56c1-475c-9969-dd93aa60464c" class="numbered-list" start="4"><li>새로운 이벤트 생성</li></ol><ol type="1" id="8b1b8009-cbc2-436b-9465-77f07d3103c5" class="numbered-list" start="5"><li>kafka-producer 이벤트 쓰기</li></ol><ol type="1" id="d547526e-6e59-4101-ab09-3de37dd6c4e7" class="numbered-list" start="6"><li>kafka-costumer 이벤트 읽기</li></ol><p id="89d76617-52be-4013-a82d-d95344d81f75" class="">
+</p><h3 id="7e4492ef-2b43-44fa-a085-0102b7e1cb37" class="">BSA08 Regress Whitewine</h3><p id="befd7c99-a242-4786-a753-796be806f7d6" class="">선형회귀 &amp; 로지스틱 회귀 <code>pandas, numpy, matplotlib.pyplot, sklearn.linear_model, statsmodels.api</code></p><blockquote id="3b6bf584-4b39-4035-b87a-4a28db7cd238" class="">선형회귀는 종속변수와 독립변수 사이의 선형적 관계를 가정한 회귀 분석입니다. 예측값과 실제값 사이의 차이를 최소화하는데 중점을 두어 계수를 추정합니다. 또한, 회귀 계수를 이용하여 독립변수와 종속변수 사이의 선형 방정식을 구성하고, 이를 통해 새로운 독립변수의 값을 입력하여 종속변수를 예측할 수 있습니다. </blockquote><p id="fa2ed30b-1590-4597-bcc5-0e9b0a4f9b8c" class=""><em><strong>coef</strong></em>_는 기울기를 나타내며, intercept_는 절편을 나타냅니다</p><p id="66c51e71-434e-4b0b-a4bc-f1b8594d4a30" class="">
+</p><blockquote id="5b9425e8-6724-47cc-8363-76523c987129" class="">로지스틱 회귀는 종속 변수와 독립 변수의 관계를 모델링하는 데 사용되는 회귀 분석입니다. 이는 일반적으로 이항 분류 문제를 해결하는 데 사용됩니다. 로지스틱 회귀 모델에서는 로짓 함수를 사용하여 종속 변수가 특정 값을 갖을 확률을 추정합니다.</blockquote><pre id="446ed625-6ed3-495a-9b7d-9c406a7d518f" class="code code-wrap"><code>from statsmodels.formula.api import ols
+
+model = ols(&#x27;y ~ x1 + x2 + x3&#x27;, data=df).fit()
+predictions = model.predict(df[[&#x27;x1&#x27;, &#x27;x2&#x27;, &#x27;x3&#x27;]])
+
+print_model = model.summary()
+print(print_model)
+</code></pre><p id="4dda428d-2c18-4ce6-a479-fc112142d0f9" class="">위 코드는 <code>y</code>를 <code>x1</code>, <code>x2</code>, <code>x3</code>의 선형 조합으로 모델링하는 OLS 회귀 분석을 수행하는 코드입니다. <code>data</code>는 데이터프레임을, <code>formula</code>는 종속변수와 독립변수 간의 관계식을 문자열로 나타냅니다. <code>fit()</code> 메소드를 사용하여 모델을 피팅하고, <code>summary()</code> 메소드를 사용하여 결과를 출력합니다.</p><p id="9dbeb231-535b-4579-a89d-d7f16af0c75a" class="">OLS 회귀는 &quot;ordinary least squares regression&quot;의 약어로, 선형 회귀 모델의 파라미터를 추정하는 방법 중 하나입니다. 이 방법에서는 잔차 제곱합을 최소화하여 데이터에 가장 잘 맞는 선을 찾아냅니다. OLS 회귀는 종속 변수와 하나 이상의 독립 변수 간의 관계를 모델링하는 데 사용되며, 통계 및 기계 학습에서 일반적으로 사용됩니다. <code>statsmodels</code> 및 <code>scikit-learn</code>과 같은 여러 소프트웨어 패키지에서 구현되어 있습니다.</p><p id="64960ac3-be13-4ad3-8af1-c9605146a11b" class="">
+</p><p id="72c11226-1934-44a9-9118-7d1944e46ddb" class="">LASSO와 Ridge regression은 선형 회귀의 일종으로, 회귀 모델의 과적합을 방지하는 방법입니다. 이 두 방법은 일반적으로 변수 선택이나 차원 축소에 사용됩니다.</p><p id="078a0e79-de1a-4237-a1f9-dcb863e9e371" class="">LASSO(regularization path with L1 penalty)는 L1 패널티를 사용하여 회귀 계수를 규제합니다. L1 패널티는 계수를 0으로 만들 수 있으므로 모델에서 변수를 선택하는 능력을 가집니다. 이 방법은 변수 선택 기능을 수행하므로, 데이터 세트에서 중요하지 않은 변수를 제거하고 모델을 단순화할 수 있습니다.</p><p id="d57c085a-f1bb-49a9-b1aa-a75002126555" class="">Ridge(regularization path with L2 penalty)는 L2 패널티를 사용하여 회귀 계수를 규제합니다. 이는 모든 계수를 축소하지만, 0으로 만들지는 않습니다. Ridge regression은 LASSO의 단점인 변수 선택 능력이 없지만, 변수 간의 상관 관계가 높은 경우에 유용합니다.</p><p id="ea8c5496-4ce3-43ad-94ca-7843f426b4dd" class="">두 방법은 모두 회귀 계수를 축소하여 과적합을 방지하며, 차이점은 규제 방법입니다. LASSO는 계수를 0으로 만드는 능력이 있어 변수 선택 기능을 수행합니다. Ridge는 L2 패널티를 사용하여 모든 계수를 축소하지만, 0으로 만들지는 않습니다. 따라서 Ridge는 변수 간 상관 관계가 높은 경우에 더 유용할 수 있습니다.</p><p id="4bd0375d-7c9d-4563-8e02-fb9364432301" class="">
+</p><p id="18d3cfc5-f210-4a30-9deb-04c4abc6f97b" class="">다범주 로짓 모형(multinomial logistic regression)은 종속 변수가 2개 이상의 범주가 있는 경우에 사용되는 로지스틱 회귀 분석입니다. 이는 일반적으로 다중 분류 문제를 해결하는 데 사용됩니다. 로지스틱 회귀 모델에서는 로짓 함수를 사용하여 종속 변수가 특정 값(보통 0 또는 1)을 갖을 확률을 추정합니다. 하지만 다범주 로짓 모형에서는 종속 변수가 2개 이상의 범주를 가지므로, 이를 표현하기 위해 소프트맥스(softmax) 함수를 사용합니다. 소프트맥스 함수는 범주별로 확률을 계산하고, 이를 합치면 1이 되도록 정규화합니다. 다범주 로짓 모형은 로지스틱 회귀 분석과 마찬가지로 독립 변수와 종속 변수 간의 관계를 모델링하는 데 사용됩니다.</p><p id="ef9a8a64-84a7-4523-bb63-ebcef6951196" class="">로지스틱 회귀 모형과 다범주 로짓 모형은 모두 분류 문제에 사용되는 통계 모델입니다. 그러나 두 모델 사이에는 몇 가지 차이점이 있습니다.</p><ol type="1" id="3761a248-feea-4c7d-b4ed-a40cecdc4ee8" class="numbered-list" start="1"><li>종속 변수의 유형:<ul id="18255ca1-2d1a-44c1-a530-c094a0b3937a" class="bulleted-list"><li style="list-style-type:disc">로지스틱 회귀 모형: 이진 분류 문제에 적용됩니다. 종속 변수는 두 개의 클래스 중 하나에 속하는 경우에 사용됩니다.</li></ul><ul id="b39e126f-55ee-406b-8d32-86e4d3dd1bcc" class="bulleted-list"><li style="list-style-type:disc">다범주 로짓 모형: 다중 분류 문제에 적용됩니다. 종속 변수는 세 개 이상의 클래스 중 하나에 속하는 경우에 사용됩니다.</li></ul></li></ol><ol type="1" id="b4a01351-7bb1-404f-a6d7-3d10bd678575" class="numbered-list" start="2"><li>확률 분포:<ul id="19851575-b26a-41ec-8b3a-9a226023f170" class="bulleted-list"><li style="list-style-type:disc">로지스틱 회귀 모형: 로지스틱 회귀는 종속 변수의 확률 분포로 이항 분포를 가정합니다. 종속 변수의 값을 0 또는 1로 예측하며, 로지스틱 함수를 사용하여 이진 분류를 수행합니다.</li></ul><ul id="ea8677c8-90a4-4a45-81c3-4f60d9c613ee" class="bulleted-list"><li style="list-style-type:disc">다범주 로짓 모형: 다범주 로짓 모형은 다항 로지스틱 분포를 가정합니다. 종속 변수의 값은 다중 클래스 중 하나가 될 확률을 나타내는 벡터입니다. 소프트맥스 함수를 사용하여 다중 클래스 분류를 수행합니다.</li></ul></li></ol><ol type="1" id="300da120-fde2-40e2-98ab-f6b8b9171c25" class="numbered-list" start="3"><li>모수 추정 방법:<ul id="16c8b649-33fe-4519-b892-e37a1c6c8735" class="bulleted-list"><li style="list-style-type:disc">로지스틱 회귀 모형: 로지스틱 회귀 모형은 최대 가능도 추정 방법을 사용하여 모수를 추정합니다. 일반적으로 경사 하강법과 같은 반복적인 최적화 알고리즘을 사용하여 최적의 모수를 찾습니다.</li></ul><ul id="012b1bd1-d8ae-4406-ba52-6f67ee57d721" class="bulleted-list"><li style="list-style-type:disc">다범주 로짓 모형: 다범주 로짓 모형은 로그-우도를 최대화하는 방법으로 모수를 추정합니다. 로그-우도 함수는 모든 클래스에 대한 확률의 곱으로 정의됩니다. 최적화 알고리즘은 일반적으로 다변수 경사 하강법 또는 이에 대한 변형을 사용합니다.</li></ul></li></ol><ol type="1" id="61c6dd39-5ff9-4007-9741-5a89d8ab38d7" class="numbered-list" start="4"><li>해석:<ul id="60fc295e-a82e-467b-99b9-3bf2d4aa8bb8" class="bulleted-list"><li style="list-style-type:disc">로지스틱 회귀 모형: 로지스틱 회귀 모형에서는 로그 오즈(odds) 비율을 사용하여 독립 변수와 종속 변수 사이의 관계를 해석할 수 있습니다. 로그 오즈는 로지스틱 함수에 의해 변환된 선형 조합으로 표현됩니다.</li></ul><ul id="7f206ea9-fc71-4d95-91bb-79166e47f953" class="bulleted-list"><li style="list-style-type:disc">다범주 로짓 모형: 다범주 로짓 모형에서는 종속 변수의 클래스 간의 상대적 확률을 해석할 수 있습니다. 소프트맥스 함수를 통해 클래스별 확률을 계산하고, 가장 높은 확률을 가진 클래스를 선택합니다.</li></ul></li></ol></div></article></body></html>
